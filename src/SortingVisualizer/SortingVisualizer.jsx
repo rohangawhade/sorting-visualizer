@@ -32,7 +32,6 @@ export default class SortingVisualizer extends React.Component{
         arrayBars.forEach(arr => arr.style.backgroundColor = "#233659");
         this.setState({array:arrray});
     }
-    // #F3DCF6 #363D44 202428
     mergeSort(){
         const animations = getMergeSortAnimations(this.state.array);
         for(let i=0; i<animations.length; i++){
