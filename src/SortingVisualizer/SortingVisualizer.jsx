@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 const ANIMATION_SPEED_MS = 10;
 
-const NUMBER_OF_ARRAY_BARS = 40;
+const NUMBER_OF_ARRAY_BARS = 25;
 
 export default class SortingVisualizer extends React.Component{
     constructor(props){
@@ -15,8 +15,7 @@ export default class SortingVisualizer extends React.Component{
 
         this.state = {
             array: [],
-            // colorOrig: "#aa4668"
-            colorOrig: "#9C4668"
+            colorOrig: "#233659"
         };
     }
 
@@ -27,13 +26,13 @@ export default class SortingVisualizer extends React.Component{
     resetArray(){
         const arrray = [];
         for (let i = 0; i<NUMBER_OF_ARRAY_BARS; i++){
-            arrray.push(randomIntFromInterval(5, 600));
+            arrray.push(randomIntFromInterval(50, 600));
         }
         let arrayBars = document.querySelectorAll('.array-bar');
-        arrayBars.forEach(arr => arr.style.backgroundColor = "#9C4668");
+        arrayBars.forEach(arr => arr.style.backgroundColor = "#233659");
         this.setState({array:arrray});
     }
-    // #F3DCF6
+    // #F3DCF6 #363D44 202428
     mergeSort(){
         const animations = getMergeSortAnimations(this.state.array);
         for(let i=0; i<animations.length; i++){
@@ -43,7 +42,7 @@ export default class SortingVisualizer extends React.Component{
                 const [barOneIdx, barTwoIdx] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
-                const color = i%3 === 0 ? '#5319E7' : '#F3DCF6';
+                const color = i%3 === 0 ? '#3B49DF' : '#363D44';
                 setTimeout(()=>{
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
@@ -70,11 +69,11 @@ export default class SortingVisualizer extends React.Component{
         return(
             <div className="array-container">
             <div className="Buttons">
-                <Button variant="light" onClick={() => this.resetArray()}>Generate new Array</Button>
-                <Button variant="outline-success" onClick={() => this.mergeSort()}>Merge Sort</Button>
-                <Button variant="outline-success" onClick={() => this.quickSort()}>Quick Sort</Button>
-                <Button variant="outline-success" onClick={() => this.heapSort()}>Heap Sort</Button>
-                <Button variant="outline-success" onClick={() => this.bubbleSort()}>Bubble Sort</Button>
+                <Button variant="outline-dark" onClick={() => this.resetArray()}>Generate new Array</Button>
+                <Button variant="outline-primary" onClick={() => this.mergeSort()}>Merge Sort</Button>
+                <Button variant="outline-primary" onClick={() => this.quickSort()}>Quick Sort</Button>
+                <Button variant="outline-primary" onClick={() => this.heapSort()}>Heap Sort</Button>
+                <Button variant="outline-primary" onClick={() => this.bubbleSort()}>Bubble Sort</Button>
             </div>
                 <div className="inner-container">
                     {array.map((value, idx) => (

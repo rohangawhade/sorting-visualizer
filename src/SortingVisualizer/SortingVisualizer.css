@@ -1,33 +1,33 @@
 .array-container{
     display: flex;
-    align-items: center;
+    justify-self: center;
     flex-direction: column;
-    max-height: 700px;
+    height: 630px;
     margin: 10px;
 }
 
 .inner-container{
     height: 700px;
     align-self: center;
+    align-items: flex-end;
     flex: 1 0 100%;
     margin-top: 10px;
-    border: 1px solid white;
+    display: flex;
 }
 
 .array-bar{
-    width: 10px;
+    width: 20px;
     display: inline-block;
-    /* background-color: #34aa19; */
     background-color: #93C2DB;
-    /* display: inline-block; */
     margin: 10px 10px;
 }
-/* #9C4668 */
+
 .Buttons{
     align-self: center;
 }
 
-button{
+.Buttons Button{
+    font-weight: 700;
     width: max-content;
     height: 50px;
     margin: 2px 20px 2px 2px;
