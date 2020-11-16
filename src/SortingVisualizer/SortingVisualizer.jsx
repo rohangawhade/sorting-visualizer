@@ -15,6 +15,7 @@ export default class SortingVisualizer extends React.Component{
 
         this.state = {
             array: [],
+            // colorOrig: "#aa4668"
             colorOrig: "#9C4668"
         };
     }
@@ -28,7 +29,9 @@ export default class SortingVisualizer extends React.Component{
         for (let i = 0; i<NUMBER_OF_ARRAY_BARS; i++){
             arrray.push(randomIntFromInterval(5, 600));
         }
-        this.setState({array:arrray, colorOrig:"#aa4668"});
+        let arrayBars = document.querySelectorAll('.array-bar');
+        arrayBars.forEach(arr => arr.style.backgroundColor = "#9C4668");
+        this.setState({array:arrray});
     }
     // #F3DCF6
     mergeSort(){
@@ -39,8 +42,8 @@ export default class SortingVisualizer extends React.Component{
             if(isColorChange){
                 const [barOneIdx, barTwoIdx] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
-                const barTwoStyle = arrayBars[barTwoIdx].style;    
-                const color = i%3 === 0 ? '#93C2DB' : '#aa4668';
+                const barTwoStyle = arrayBars[barTwoIdx].style;
+                const color = i%3 === 0 ? '#5319E7' : '#F3DCF6';
                 setTimeout(()=>{
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
