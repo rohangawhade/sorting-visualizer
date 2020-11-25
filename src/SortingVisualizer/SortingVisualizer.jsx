@@ -1,13 +1,16 @@
 import React from 'react';
 
 import './SortingVisualizer.css';
-import {getMergeSortAnimations} from '../SortingAlgorithms/sortingAlgorithm.js';
+
+import {getMergeSortAnimations} from '../SortingAlgorithms/MergeSortingAlgorithm';
+import {SelectionSort} from '../SortingAlgorithms/SelectionSort';
 
 import Button from 'react-bootstrap/Button';
 
-const ANIMATION_SPEED_MS = 10;
+const ANIMATION_SPEED_MS = 1000;
 
-const NUMBER_OF_ARRAY_BARS = 25;
+// const NUMBER_OF_ARRAY_BARS = 25;
+const NUMBER_OF_ARRAY_BARS = 10;
 
 export default class SortingVisualizer extends React.Component{
     constructor(props){
@@ -32,6 +35,7 @@ export default class SortingVisualizer extends React.Component{
         arrayBars.forEach(arr => arr.style.backgroundColor = "#233659");
         this.setState({array:arrray});
     }
+
     mergeSort(){
         const animations = getMergeSortAnimations(this.state.array);
         for(let i=0; i<animations.length; i++){
@@ -59,7 +63,43 @@ export default class SortingVisualizer extends React.Component{
 
     quickSort(){}
 
-    heapSort(){}
+    selectionSort(){
+        const animations = SelectionSort(this.state.array);
+        console.log("animations = ");
+        console.log(animations);
+        let count=0;
+        for(let i=0; i<this.state.array.length; i++){
+            const arrayBars = document.querySelectorAll('.array-bar');
+            console.log(arrayBars);
+            let j=i;
+            while(j<this.state.array.length){
+                const [barOneIdx, barTwoIdx] = animations[count++];
+                // const barOneStyle = arrayBars[barOneIdx].style;
+                // const barTwoStyle = arrayBars[barTwoIdx].style;
+                setTimeout(() => {
+                    arrayBars[barOneIdx].style.backgroundColor = '#3B49DF';
+                    arrayBars[barTwoIdx].style.backgroundColor = '#3B49DF';
+                }, j*ANIMATION_SPEED_MS);
+                j++;
+            }
+            // eslint-disable-next-line no-loop-func
+            setTimeout(() => {
+                const [barOneIdx, barTwoIdx] = animations[count++];
+                // const barOneStyle = arrayBars[barOneIdx].style;
+                // const barTwoStyle = arrayBars[barTwoIdx].style;
+                arrayBars[barOneIdx].style.backgroundColor = '#3B49DF';
+                arrayBars[barTwoIdx].style.backgroundColor = '#3B49DF';
+
+                const [barOne, newHeight_one] = animations[count++];
+                // const barOne_Style = arrayBars[barOne].style;
+                arrayBars[barOne].style.height = `${newHeight_one}px`;
+
+                const [barTwo, newHeight_two] = animations[count++];
+                // const barTwo_Style = arrayBars[barTwo].style;
+                arrayBars[barTwo].style.height = `${newHeight_two}px`;
+            }, j*ANIMATION_SPEED_MS);
+        }
+    }
 
     bubbleSort(){}
 
@@ -71,7 +111,7 @@ export default class SortingVisualizer extends React.Component{
                 <Button variant="outline-dark" onClick={() => this.resetArray()}>Generate new Array</Button>
                 <Button variant="outline-primary" onClick={() => this.mergeSort()}>Merge Sort</Button>
                 <Button variant="outline-primary" onClick={() => this.quickSort()}>Quick Sort</Button>
-                <Button variant="outline-primary" onClick={() => this.heapSort()}>Heap Sort</Button>
+                <Button variant="outline-primary" onClick={() => this.selectionSort()}>Selection Sort</Button>
                 <Button variant="outline-primary" onClick={() => this.bubbleSort()}>Bubble Sort</Button>
             </div>
                 <div className="inner-container">
