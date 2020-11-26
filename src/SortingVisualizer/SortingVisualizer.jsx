@@ -7,10 +7,10 @@ import {SelectionSort} from '../SortingAlgorithms/SelectionSort';
 
 import Button from 'react-bootstrap/Button';
 
-const ANIMATION_SPEED_MS = 1000;
+const ANIMATION_SPEED_MS = 10;
 
-// const NUMBER_OF_ARRAY_BARS = 25;
-const NUMBER_OF_ARRAY_BARS = 10;
+const NUMBER_OF_ARRAY_BARS = 25;
+// const NUMBER_OF_ARRAY_BARS = 10;
 
 export default class SortingVisualizer extends React.Component{
     constructor(props){
@@ -31,6 +31,7 @@ export default class SortingVisualizer extends React.Component{
         for (let i = 0; i<NUMBER_OF_ARRAY_BARS; i++){
             arrray.push(randomIntFromInterval(50, 600));
         }
+        // const arrray = [400, 200, 650, 100];
         let arrayBars = document.querySelectorAll('.array-bar');
         arrayBars.forEach(arr => arr.style.backgroundColor = "#233659");
         this.setState({array:arrray});
@@ -41,6 +42,7 @@ export default class SortingVisualizer extends React.Component{
         for(let i=0; i<animations.length; i++){
             const arrayBars = document.getElementsByClassName('array-bar');
             const isColorChange = i%3 !== 2;
+            console.log('inside for');
             if(isColorChange){
                 const [barOneIdx, barTwoIdx] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
@@ -49,12 +51,14 @@ export default class SortingVisualizer extends React.Component{
                 setTimeout(()=>{
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
+                    console.log('inside if setTimeout');
                 }, i*ANIMATION_SPEED_MS);
             }else{
                 setTimeout(() => {
                     const [barOneIdx, newHeight] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
-                    barOneStyle.height = `${newHeight}px`;        
+                    barOneStyle.height = `${newHeight}px`;
+                    console.log('inside else setTimeout');       
                 }, i*ANIMATION_SPEED_MS);
             }
         }
@@ -67,37 +71,38 @@ export default class SortingVisualizer extends React.Component{
         const animations = SelectionSort(this.state.array);
         console.log("animations = ");
         console.log(animations);
-        let count=0;
-        for(let i=0; i<this.state.array.length; i++){
-            const arrayBars = document.querySelectorAll('.array-bar');
-            console.log(arrayBars);
-            let j=i;
-            while(j<this.state.array.length){
-                const [barOneIdx, barTwoIdx] = animations[count++];
-                // const barOneStyle = arrayBars[barOneIdx].style;
-                // const barTwoStyle = arrayBars[barTwoIdx].style;
+        for(let i=0; i<animations.length; i++){
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const isColorChange = animations[i][0] === "iteration"? true:false;
+            if(isColorChange){
                 setTimeout(() => {
-                    arrayBars[barOneIdx].style.backgroundColor = '#3B49DF';
-                    arrayBars[barTwoIdx].style.backgroundColor = '#3B49DF';
-                }, j*ANIMATION_SPEED_MS);
-                j++;
+                    const [type, firstIdx, iterIdx] = animations[i];
+                    const firstIdxStyle = arrayBars[firstIdx].style;
+                    const iterIdxStyle = arrayBars[iterIdx].style;
+                    firstIdxStyle.backgroundColor = "#3B49DF";
+                    iterIdxStyle.backgroundColor = "#3B49DF";
+                    console.log("value of i in if = "+i);
+                }, i*ANIMATION_SPEED_MS);
+            }else{
+                if(animations[i].length === 2){
+                    setTimeout(() => {
+                        const [firstIdx, lowestIdx] = animations[i];
+                        const firstIdxStyle = arrayBars[firstIdx].style;
+                        const lowestIdxStyle = arrayBars[lowestIdx].style;
+                        firstIdxStyle.backgroundColor = "#363D44";
+                        lowestIdxStyle.backgroundColor = "#363D44";
+                    }, i*ANIMATION_SPEED_MS);
+                }else{
+                    setTimeout(() => {
+                        const [firstIdx, firstIdxValue, lowestIdx, lowestIdxValue] = animations[i];
+                        const firstIdxStyle = arrayBars[firstIdx].style;
+                        const lowestIdxStyle = arrayBars[lowestIdx].style;
+                        firstIdxStyle.height = `${lowestIdxValue}px`;
+                        lowestIdxStyle.height = `${firstIdxValue}px`;
+                        console.log("value of i in else = "+i);
+                    }, i*ANIMATION_SPEED_MS);
+                }
             }
-            // eslint-disable-next-line no-loop-func
-            setTimeout(() => {
-                const [barOneIdx, barTwoIdx] = animations[count++];
-                // const barOneStyle = arrayBars[barOneIdx].style;
-                // const barTwoStyle = arrayBars[barTwoIdx].style;
-                arrayBars[barOneIdx].style.backgroundColor = '#3B49DF';
-                arrayBars[barTwoIdx].style.backgroundColor = '#3B49DF';
-
-                const [barOne, newHeight_one] = animations[count++];
-                // const barOne_Style = arrayBars[barOne].style;
-                arrayBars[barOne].style.height = `${newHeight_one}px`;
-
-                const [barTwo, newHeight_two] = animations[count++];
-                // const barTwo_Style = arrayBars[barTwo].style;
-                arrayBars[barTwo].style.height = `${newHeight_two}px`;
-            }, j*ANIMATION_SPEED_MS);
         }
     }
 
