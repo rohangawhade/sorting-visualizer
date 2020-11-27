@@ -30,13 +30,16 @@ export default class SortingVisualizer extends React.Component{
             colorOrig: "#233659",
             modalshow: false,
             userip:false,
-            compare:false
+            compare:false,
+            noOfBars: 30,
+            animationSpeed: 30
         };
         this.modalShowtoggle = this.modalShowtoggle.bind(this);
         this.modalHidetoggle = this.modalHidetoggle.bind(this);
         this.comparealgo = this.comparealgo.bind(this);
-
         this.user = this.user.bind(this);
+        this.noOfBarsValue = this.noOfBarsValue.bind(this);
+        this.setAnimationSpeed = this.setAnimationSpeed.bind(this);
     }
 
     componentDidMount(){
@@ -47,9 +50,17 @@ export default class SortingVisualizer extends React.Component{
         this.setState({array:arrayy});
     }
 
+    noOfBarsValue(value){
+        this.setState({noOfBars:value.target.value}, () => this.resetArray());
+    }
+
+    setAnimationSpeed(value){
+        this.setState({animationSpeed:value.target.value});
+    }
+
     resetArray(){
         const arrray = [];
-        for (let i = 0; i<NUMBER_OF_ARRAY_BARS; i++){
+        for (let i = 0; i<this.state.noOfBars; i++){
             arrray.push(randomIntFromInterval(50, 600));
         }
         // const arrray = [400, 200, 650, 100];
@@ -73,14 +84,14 @@ export default class SortingVisualizer extends React.Component{
                     barOneStyle.backgroundColor = color;
                     barTwoStyle.backgroundColor = color;
                     console.log('inside if setTimeout');
-                }, i*ANIMATION_SPEED_MS);
+                }, i*this.state.animationSpeed);
             }else{
                 setTimeout(() => {
                     const [barOneIdx, newHeight] = animations[i];
                     const barOneStyle = arrayBars[barOneIdx].style;
                     barOneStyle.height = `${newHeight*0.7}px`;
                     console.log('inside else setTimeout');       
-                }, i*ANIMATION_SPEED_MS);
+                }, i*this.state.animationSpeed);
             }
         }
 
@@ -108,7 +119,7 @@ export default class SortingVisualizer extends React.Component{
                     barTwoStyle.backgroundColor = SECONDARY_COLOR;
                     pivotidxStyle.backgroundColor = '#000000';
                     }, i * ANIMATION_SPEED_MS);
-    
+
                 }
                 else{
                     
@@ -222,12 +233,10 @@ export default class SortingVisualizer extends React.Component{
         this.setState({compare:true});
       }
       modalShowtoggle(){
-        //e.preventDefault();
         this.setState({userip:true})
         this.setState({modalshow: true});
       }
       modalHidetoggle(){
-        //e.preventDefault();
         this.setState({modalshow: false});
       }
 
@@ -238,6 +247,16 @@ export default class SortingVisualizer extends React.Component{
             <SetJumbotron />
             {!this.state.compare &&
                 <div className="array-container">
+                    <div className="Sliders">
+                        <div>
+                            <h5>No of Bars</h5>
+                            <input type="range" min={1} max={80} onChange={this.noOfBarsValue}/>
+                        </div>
+                        <div>
+                            <h5>Speed of visualizer</h5>
+                            <input type="range" min={1} max={2000} onChange={this.setAnimationSpeed}/>
+                        </div>
+                    </div>
                 <div className="Buttons">
                     <Button variant="outline-dark" onClick={() => this.resetArray()}>Generate new Array</Button>
                     <Button variant="outline-dark" onClick={() => this.modalShowtoggle()}>Show Modal</Button>
@@ -265,14 +284,13 @@ export default class SortingVisualizer extends React.Component{
                 user={this.user}
                 />
             }
-            
-            <SetCaraousel />
+
+            <SetCaraousel/>
             </>
         );
     }
 }
 
 function randomIntFromInterval(min, max){
-    // return Math.floor(Math.random() * (max - min + 1) + min);
     return Math.floor((Math.random() * (max - min + 1) + min)*0.7);
 }
