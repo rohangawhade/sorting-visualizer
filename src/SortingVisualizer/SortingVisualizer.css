@@ -34,6 +34,18 @@
     display: flex;
 }
 
+.compare-inner-container{
+    justify-content: baseline;
+    width: 100%;
+    min-height: 150px;
+    height: 700px;
+    align-self: center;
+    align-items: flex-end;
+    flex: 1 0 100%;
+    /* margin-top: 10px; */
+    display: flex;
+}
+
 /* .array-bar{
     width: 20px;
     display: inline-block;
@@ -41,6 +53,14 @@
     margin: 10px 10px;
 } */
 .array-bar{
+    width: 10%;
+    min-width: 1px;
+    display: inline-block;
+    background-color: #93C2DB;
+    /* margin-right: 7px; */
+    margin-right: 1%;
+}
+.merge-array-bar, .quick-array-bar, .heap-array-bar, .bubble-array-bar{
     width: 10%;
     min-width: 1px;
     display: inline-block;

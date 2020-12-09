@@ -6,7 +6,7 @@ import {getHeapSortAnimations} from '../SortingAlgorithms/HeapSort';
 
 import UserInput from './UserInput';
 
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 
 import './CompareVisualizer.css';
 

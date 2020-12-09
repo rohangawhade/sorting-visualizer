@@ -4,14 +4,17 @@ import {getQuickSortAnimations} from '../SortingAlgorithms/QuickSort';
 import {getHeapSortAnimations} from '../SortingAlgorithms/HeapSort.js';
 import {SelectionSort} from '../SortingAlgorithms/SelectionSort';
 
+import '../SortingVisualizer/SortingVisualizer.css';
 
 const PRIMARY_COLOR = '#363D44';
 const SECONDARY_COLOR = '#3B49DF';
 
-export const mergeSort = (array, animationSpeed) => {
+export const mergeSort = (name, array, animationSpeed) => {
     const animations = getMergeSortAnimations(array);
     for(let i=0; i<animations.length; i++){
-        const arrayBars = document.getElementsByClassName('array-bar');
+        // const arrayBars = document.getElementsByClassName('array-bar');
+        const st = name ? (`${name}-array-bar`): 'array-bar';
+        const arrayBars = document.getElementsByClassName(st);
         const isColorChange = i%3 !== 2;
         if(isColorChange){
             const [barOneIdx, barTwoIdx] = animations[i];
@@ -32,16 +35,16 @@ export const mergeSort = (array, animationSpeed) => {
     }
 }
 
-export const quickSort = (array, animationSpeed) => {
+export const quickSort = (name, array, animationSpeed) => {
     const animations = getQuickSortAnimations(array);
 
     for (let i = 0; i < animations.length; i++) {
-        const arrayBars = document.getElementsByClassName('array-bar');
+        const st = name ? (`${name}-array-bar`): 'array-bar';
+        const arrayBars = document.getElementsByClassName(st);
         const isColorChange = i % 3 !== 1;
         if(isColorChange) {
             if(i%3===0){
                 const [barOneIdx, barTwoIdx, pivotidx] = animations[i];
-               
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
                 const pivotidxStyle = arrayBars[pivotidx].style;
@@ -52,9 +55,7 @@ export const quickSort = (array, animationSpeed) => {
                 }, i * animationSpeed);
             }
             else{
-                
                 const [barOneIdx, barTwoIdx, pivotidx] = animations[i];
-                
                 const barOneStyle = arrayBars[barOneIdx].style;
                 const barTwoStyle = arrayBars[barTwoIdx].style;
                 const pivotidxStyle = arrayBars[pivotidx].style;
@@ -86,11 +87,12 @@ export const quickSort = (array, animationSpeed) => {
   }
 
 
-export const bubbleSort = (array, animationSpeed) => {
+export const bubbleSort = (name, array, animationSpeed) => {
     const animations = getBubbleSortAnimations(array);
 
     for (let i = 0; i < animations.length; i++) {
-        const arrayBars = document.getElementsByClassName('array-bar');
+        const st = name ? (`${name}-array-bar`): 'array-bar';
+        const arrayBars = document.getElementsByClassName(st);
         const isColorChange = i % 3 !== 1;
         if(isColorChange) {
             const [barOneIdx, barTwoIdx] = animations[i];
@@ -120,10 +122,11 @@ export const bubbleSort = (array, animationSpeed) => {
 
 }
 
-export const heapSort = (array, animationSpeed) => {
+export const heapSort = (name, array, animationSpeed) => {
     const animations = getHeapSortAnimations(array);
     for (let i = 0; i < animations.length; i++) {
-        const arrayBars = document.getElementsByClassName('array-bar');
+        const st = name ? (`${name}-array-bar`): 'array-bar';
+        const arrayBars = document.getElementsByClassName(st);
         const isColorChange = i % 3 !== 1;
         if(isColorChange) {
             const [barOneIdx, barTwoIdx] = animations[i];
