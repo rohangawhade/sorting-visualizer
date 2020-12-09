@@ -3,6 +3,8 @@
 Sorting Visualizer is a react application developed to help users visualize different sorting techniques.<br>
 This will help the users understand the algorithms in a better way!
 
+### You can try the application here: [sorting-visualizer](https://rohangawhade.github.io/sorting-visualizer/)
+
 ## Features
 
 - 5 different Algorithms' Visualization available
