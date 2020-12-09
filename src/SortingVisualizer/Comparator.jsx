@@ -17,7 +17,7 @@ export default class Comparator extends React.Component{
             modalshow: false,
             userip:false,
             compare:true,
-            noOfBars: 30,
+            noOfBars: 40,
             animationSpeed: 10
         };
         this.modalShowtoggle = this.modalShowtoggle.bind(this);
@@ -60,7 +60,7 @@ export default class Comparator extends React.Component{
     resetArray(){
         const arrray = [];
         for (let i = 0; i<this.state.noOfBars; i++){
-            arrray.push(this.randomIntFromInterval(50, 600));
+            arrray.push(this.randomIntFromInterval(50, 400));
         }
         let arrayBars = document.querySelectorAll('.array-bar');
         arrayBars.forEach(arr => arr.style.backgroundColor = "#233659");
@@ -68,12 +68,12 @@ export default class Comparator extends React.Component{
     }
 
     randomIntFromInterval(min, max){
-        return Math.floor((Math.random() * (max - min + 1) + min)*0.25);
+        return Math.floor((Math.random() * (max - min + 1) + min)*0.40);
     }
 
     startCompare(array, animationSpeed){
         quickSort('quick', array, animationSpeed);
-        bubbleSort('bubble', array, animationSpeed);
+        // bubbleSort('bubble', array, animationSpeed);
         mergeSort('merge', array, animationSpeed);
         heapSort('heap', array, animationSpeed);
     }
@@ -102,6 +102,7 @@ export default class Comparator extends React.Component{
                     <Button variant="outline-danger" onClick={() => this.goBack(false)}>Go Back</Button>
                     <Button variant="outline-success" onClick={() => this.startCompare(array, animationSpeed)}>Start</Button>
                 </div>
+                    <h5 className="comparator">Merge Sort</h5>
                     <div className="compare-inner-container">
                         {array.map((value, idx) => (
                             <div
@@ -111,6 +112,7 @@ export default class Comparator extends React.Component{
                             </div>
                         ))}
                     </div>
+                    <h5 className="comparator">Quick Sort</h5>
                     <div className="compare-inner-container">
                         {array.map((value, idx) => (
                             <div
@@ -120,6 +122,7 @@ export default class Comparator extends React.Component{
                             </div>
                         ))}
                     </div>
+                    <h5 className="comparator">Heap Sort</h5>
                     <div className="compare-inner-container">
                         {array.map((value, idx) => (
                             <div
@@ -129,7 +132,7 @@ export default class Comparator extends React.Component{
                             </div>
                         ))}
                     </div>
-                    <div className="compare-inner-container">
+                    {/* <div className="compare-inner-container">
                         {array.map((value, idx) => (
                             <div
                                 className='bubble-array-bar'
@@ -137,7 +140,7 @@ export default class Comparator extends React.Component{
                                 style={{height: `${value}px`, backgroundColor: `${colorOrig}`}}>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
             }
             {this.state.userip &&

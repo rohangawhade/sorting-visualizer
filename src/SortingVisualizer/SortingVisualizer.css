@@ -1,26 +1,10 @@
-/* *{
-    margin: 0px;
-    padding: 0px;
-} */
 .array-container{
     display: flex;
     justify-self: center;
     flex-direction: column;
-    /* height: 630px; */
     height: max-content;
-    /* background-color: aqua; */
-    /* margin: 10px; */
     margin-bottom: 20px;
 }
-
-/* .inner-container{
-    height: 700px;
-    align-self: center;
-    align-items: flex-end;
-    flex: 1 0 100%;
-    margin-top: 10px;
-    display: flex;
-} */
 
 .inner-container{
     justify-content: baseline;
@@ -30,34 +14,26 @@
     align-self: center;
     align-items: flex-end;
     flex: 1 0 100%;
-    /* margin-top: 10px; */
     display: flex;
 }
 
 .compare-inner-container{
     justify-content: baseline;
     width: 100%;
-    min-height: 150px;
+    min-height: 200px;
     height: 700px;
     align-self: center;
     align-items: flex-end;
     flex: 1 0 100%;
-    /* margin-top: 10px; */
     display: flex;
+    margin-right: 10px;
+    margin-left: 10px;
 }
-
-/* .array-bar{
-    width: 20px;
-    display: inline-block;
-    background-color: #93C2DB;
-    margin: 10px 10px;
-} */
 .array-bar{
     width: 10%;
     min-width: 1px;
     display: inline-block;
     background-color: #93C2DB;
-    /* margin-right: 7px; */
     margin-right: 1%;
 }
 .merge-array-bar, .quick-array-bar, .heap-array-bar, .bubble-array-bar{
@@ -65,13 +41,11 @@
     min-width: 1px;
     display: inline-block;
     background-color: #93C2DB;
-    /* margin-right: 7px; */
     margin-right: 1%;
 }
 
 .Buttons{
     display: flex;
-    /* flex-direction: row; */
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -86,4 +60,10 @@
 .Sliders{
     display: flex;
     justify-content: space-around;
+}
+
+.comparator{
+    margin: auto;
+    font-weight: 900;
+    color: #363D44;
 }
