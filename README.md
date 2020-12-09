@@ -1,3 +1,15 @@
+# About
+
+Sorting Visualizer is a react application developed to help users visualize different sorting techniques. This will help the users understand the algorithms in a better way!
+
+## Features
+
+- 5 different Algorithms' Visualization available
+- Responsive web design for variety of devices
+- User input for value of bars
+- Slider for number of bars and animation speed
+- Comparison between different algorithms available
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
